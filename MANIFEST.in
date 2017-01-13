@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include mimma *.css
+recursive-include mimma *.csv
+recursive-include mimma *.html
+recursive-include mimma *.ico
+recursive-include mimma *.js
+recursive-include mimma *.json
+recursive-include mimma *.md
+recursive-include mimma *.png
+recursive-include mimma *.py
+recursive-include mimma *.svg
+recursive-include mimma *.txt
+recursive-exclude mimma *.pyc
