@@ -1,0 +1,20 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Item", 
+  "modified": "2017-01-10 17:36:48.556355", 
+  "name": "Item-Client", 
+  "script": "cur_frm.add_fetch(\"stranka\", \"customer_name\", \"item_name\");\nfrappe.ui.form.on(\"Item\", \"item_name\", function (frm) {\n\tif (frm.doc.item_code == null) {\n\t\t//msgprint(\"test\")\n\t\tcur_frm.cscript.custom_validate = function (doc) {\n\t\t\t// clear item_code (name is from item_code)\n\t\t\tdoc.item_code = \"\";\n\t\t\tvar date = \"-\" + moment(doc.datum).format('DDMMYY');\n\t\t\t// first 2 characters based on item_group\n\t\t\tswitch (doc.item_group) {\n\t\t\tcase \"Pun\u010dka\":\n\t\t\t\tdoc.item_code = \"MPNV-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Pun\u010dka mala\":\n\t\t\t\tdoc.item_code = \"MPNM-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Medo\":\n\t\t\t\tdoc.item_code = \"MEDO-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Bro\u0161ka\":\n\t\t\t\tdoc.item_code = \"BR-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"\u017dival\":\n\t\t\t\tdoc.item_code = \"ZIV-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"VIP\":\n\t\t\t\tdoc.item_code = \"VIP-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tdoc.item_code = \"MIMA-\" + doc.item_name + date;\n\t\t\t}\n\t\t\t//msgprint(doc.item_code);\n\t\t};\n\t\t//var str = doc.item_code;\n\t\t//doc.item_name = str.substring(0, 5) + doc.item_name;\n\t};\n});\n", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Invoice", 
+  "modified": "2017-01-10 18:44:41.859050", 
+  "name": "Sales Invoice-Client", 
+  "script": "frappe.ui.form.on(\"Sales Invoice\", {\non_save: function(frm) {\nstr=frm.doc.name\ncur_frm.doc.racun=str.substring(3); \n}\n});", 
+  "script_type": "Client"
+ }
+]
