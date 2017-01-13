@@ -163,30 +163,7 @@
    "property_type": "Text", 
    "value": "PRAC-"
   }, 
-  {
-   "_assign": null, 
-   "_comments": null, 
-   "_liked_by": null, 
-   "_user_tags": null, 
-   "creation": "2017-01-10 18:52:03.517165", 
-   "default_value": null, 
-   "doc_type": "Purchase Invoice Item", 
-   "docstatus": 0, 
-   "doctype_or_field": "DocField", 
-   "field_name": "cost_center", 
-   "idx": 0, 
-   "modified": "2017-01-10 18:52:03.517165", 
-   "modified_by": "Administrator", 
-   "name": "Purchase Invoice Item-cost_center-default", 
-   "owner": "Administrator", 
-   "parent": null, 
-   "parentfield": null, 
-   "parenttype": null, 
-   "property": "default", 
-   "property_type": "Text", 
-   "value": "Blago in material - M"
-  }, 
-  {
+   {
    "_assign": null, 
    "_comments": null, 
    "_liked_by": null, 
