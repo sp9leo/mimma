@@ -12,9 +12,9 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Sales Invoice", 
-  "modified": "2017-01-10 18:44:41.859050", 
+  "modified": "2017-02-28 15:03:43.055033", 
   "name": "Sales Invoice-Client", 
-  "script": "frappe.ui.form.on(\"Sales Invoice\", {\non_save: function(frm) {\nstr=frm.doc.name\ncur_frm.doc.racun=str.substring(3); \n}\n});", 
+  "script": "frappe.ui.form.on(\"Sales Invoice\", \"after_save\", function(frm) {\n            //msgprint(frm.doc.name);\nif(frm.doc.racun == undefined){\nstr = frm.doc.name; \ncur_frm.doc.racun = str.substring(3);}      \n    \n});", 
   "script_type": "Client"
  }
 ]
