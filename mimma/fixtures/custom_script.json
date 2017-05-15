@@ -3,18 +3,18 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Item", 
-  "modified": "2017-02-26 12:51:45.100322", 
+  "modified": "2017-05-15 11:33:59.521107", 
   "name": "Item-Client", 
-  "script": "cur_frm.add_fetch(\"stranka\", \"customer_name\", \"item_name\");\nfrappe.ui.form.on(\"Item\", \"stranka\", function (frm) {\n\tif (frm.doc.item_code == null) {\n\t\t//msgprint(\"test\")\n\t\tcur_frm.cscript.custom_validate = function (doc) {\n\t\t\t// clear item_code (name is from item_code)\n\t\t\tdoc.item_code = \"\";\n\t\t\tvar date = \"-\" + moment(doc.datum).format('DDMMYY');\n\t\t\t// first 2 characters based on item_group\n\t\t\tswitch (doc.item_group) {\n\t\t\tcase \"Pun\u010dka\":\n\t\t\t\tdoc.item_code = \"MPNV-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Pun\u010dka mala\":\n\t\t\t\tdoc.item_code = \"MPNM-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Medo\":\n\t\t\t\tdoc.item_code = \"MEDO-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Bro\u0161ka\":\n\t\t\t\tdoc.item_code = \"BR-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"\u017dival\":\n\t\t\t\tdoc.item_code = \"ZIV-\" + doc.item_name + date;\n\t\t\t\tbreak;\ncase \"Zaj\u010dek\":\n\t\t\t\tdoc.item_code = \"ZAJ-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"VIP\":\n\t\t\t\tdoc.item_code = \"VIP-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tdoc.item_code = \"MIMA-\" + doc.item_name + date;\n\t\t\t}\n\t\t\t//msgprint(doc.item_code);\n\t\t};\n\t\tvar str = doc.item_code;\n\t\tdoc.item_name = str.substring(0, 5) + doc.item_name;\n\t};\n});\n", 
+  "script": "cur_frm.add_fetch(\"stranka\", \"customer_name\", \"item_name\");\nfrappe.ui.form.on(\"Item\", \"stranka\", function (frm) {\n\t\t\t//msgprint(\"test\")\n\t\tcur_frm.cscript.custom_validate = function (doc) {\n\t\t\t// clear item_code (name is from item_code)\n\t\t\tif (frm.doc.item_code != null) {\n\t\t\tdoc.item_code = \"\";};\n\t\t\tvar date = \"-\" + moment(doc.datum).format('DDMMYY');\n\t\t\t// first 2 characters based on item_group\n\t\t\tswitch (doc.item_group) {\n\t\t\tcase \"Pun\u010dka\":\n\t\t\t\tdoc.item_code = \"MPNV-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Pun\u010dka mala\":\n\t\t\t\tdoc.item_code = \"MPNM-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Medo\":\n\t\t\t\tdoc.item_code = \"MEDO-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"Bro\u0161ka\":\n\t\t\t\tdoc.item_code = \"BR-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"\u017dival\":\n\t\t\t\tdoc.item_code = \"ZIV-\" + doc.item_name + date;\n\t\t\t\tbreak;\ncase \"Zaj\u010dek\":\n\t\t\t\tdoc.item_code = \"ZAJ-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tcase \"VIP\":\n\t\t\t\tdoc.item_code = \"VIP-\" + doc.item_name + date;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tdoc.item_code = \"MIMA-\" + doc.item_name + date;\n\t\t\t}\n\t\t\t//msgprint(doc.item_code);\n\t\t\t//var str = doc.item_code;\n\t\t//doc.item_name = str.substring(0, 5) + doc.item_name;\n\t\t};\n\t\t\n\t\n});\n", 
   "script_type": "Client"
  }, 
  {
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Sales Invoice", 
-  "modified": "2017-02-28 15:03:43.055033", 
+  "modified": "2017-05-15 13:44:46.987087", 
   "name": "Sales Invoice-Client", 
-  "script": "frappe.ui.form.on(\"Sales Invoice\", \"after_save\", function(frm) {\n            //msgprint(frm.doc.name);\nif(frm.doc.racun == undefined){\nstr = frm.doc.name; \ncur_frm.doc.racun = str.substring(3);}      \n    \n});", 
+  "script": "frappe.ui.form.on(\"Sales Invoice\", \"after_save\", function(frm) {\n            //msgprint(frm.doc.name);\nif(frm.doc.racun == null){\nvar str = frm.doc.name; \nfrm.set_value(\"racun\", str.substring(3));}      \n    \n});\n\nfrappe.ui.form.on(\"Sales Invoice\",\"edit_racun\", function(frm) {\n        // use the __islocal value of doc, to check if the doc is saved or not\nif(frm.doc.edit_racun == 1){\n        frm.set_df_property(\"racun\", \"read_only\", 0);}\nelse{\n        frm.set_df_property(\"racun\", \"read_only\", 1);}\n    \n});", 
   "script_type": "Client"
  }
 ]
