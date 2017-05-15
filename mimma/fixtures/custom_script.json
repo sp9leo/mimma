@@ -12,9 +12,9 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Sales Invoice", 
-  "modified": "2017-05-15 13:44:46.987087", 
+  "modified": "2017-05-15 13:52:15.860929", 
   "name": "Sales Invoice-Client", 
-  "script": "frappe.ui.form.on(\"Sales Invoice\", \"after_save\", function(frm) {\n            //msgprint(frm.doc.name);\nif(frm.doc.racun == null){\nvar str = frm.doc.name; \nfrm.set_value(\"racun\", str.substring(3));}      \n    \n});\n\nfrappe.ui.form.on(\"Sales Invoice\",\"edit_racun\", function(frm) {\n        // use the __islocal value of doc, to check if the doc is saved or not\nif(frm.doc.edit_racun == 1){\n        frm.set_df_property(\"racun\", \"read_only\", 0);}\nelse{\n        frm.set_df_property(\"racun\", \"read_only\", 1);}\n    \n});", 
+  "script": "frappe.ui.form.on(\"Sales Invoice\", \"after_save\", function(frm) {\n            //msgprint(frm.doc.name);\nif(frm.doc.racun == null){\nvar str = frm.doc.name; \nfrm.set_value(\"racun\", str.substring(3));}      \n    \n});\n\nfrappe.ui.form.on(\"Sales Invoice\",\"refresh\", function(frm) {\n{frm.set_df_property(\"racun\", \"read_only\", 1);}\n   \n});\nfrappe.ui.form.on(\"Sales Invoice\",\"edit_racun\", function(frm) {\n        // use the __islocal value of doc, to check if the doc is saved or not\nif(frm.doc.edit_racun == 1){\n        frm.set_df_property(\"racun\", \"read_only\", 0);}\nelse{\n        frm.set_df_property(\"racun\", \"read_only\", 1);}\n    \n});", 
   "script_type": "Client"
  }
 ]
